@@ -1,0 +1,29 @@
+{
+  "name": "airbnb",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/awais-bscss/Airbnb#readme",
+  "bugs": {
+    "url": "https://github.com/awais-bscss/Airbnb/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awais-bscss/Airbnb.git"
+  },
+  "license": "MIT",
+  "author": "M_Awais",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "express-router": "^0.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
