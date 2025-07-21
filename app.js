@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const userRouter = require("./routes/userRoutes");
 const hostRouter = require("./routes/hostRoutes");
 const rootPath = require("./utils/pathUtil");
+app.use(express.static(path.join(rootPath, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(userRouter);
 app.use("/host", hostRouter);

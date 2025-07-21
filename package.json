@@ -24,6 +24,9 @@
     "express-router": "^0.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "autoprefixer": "^10.2.6",
+    "nodemon": "^3.1.10",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.19"
   }
 }
