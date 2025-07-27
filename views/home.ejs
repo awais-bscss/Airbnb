@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head.ejs") %>
+  </head>
+  <body class="bg-gray-100 flex flex-col min-h-screen">
+    <header class="bg-blue-600 w-full py-6 shadow-md">
+      <h1 class="text-4xl font-bold text-white text-center">
+        Welcome to our site
+      </h1>
+    </header>
+
+    <main class="flex flex-col items-center flex-grow px-4 py-10">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-8 text-center">
+        Here are our registered homes:
+      </h2>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl"
+      >
+        <% home.forEach(home => { %>
+        <div
+          class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center"
+        >
+          <img
+            src="<%= home.PhotoURL %>"
+            alt="<%= home.homeName %>"
+            class="w-full h-48 object-cover rounded-md mb-4"
+            onerror="this.src='https://via.placeholder.com/400x300?text=No+Image';"
+          />
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">
+            <%= home.homeName %>
+          </h3>
+          <p class="text-gray-600 mb-1">
+            💰 <strong>Price:</strong> <%= home.price %>
+          </p>
+          <p class="text-gray-600 mb-1">
+            📍 <strong>Location:</strong> <%= home.location %>
+          </p>
+          <p class="text-gray-600 mb-1">
+            ⭐ <strong>Rating:</strong> <%= home.rating %>
+          </p>
+        </div>
+        <% }) %>
+      </div>
+
+      <a
+        href="/host/add-home"
+        class="mt-10 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 text-center"
+      >
+        Add Home
+      </a>
+    </main>
+  </body>
+</html>
