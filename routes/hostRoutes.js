@@ -1,9 +1,10 @@
+// routes/hostRoutes.js
 const express = require("express");
 const hostRouter = express.Router();
-const path = require("path");
-const rootPath = require("../utils/pathUtil");
-const homeController = require("../controllers/home");
+const hostController = require("../controllers/hostController");
 
-hostRouter.get("/add-home", homeController.getHome);
-hostRouter.post("/add-home", homeController.postHome);
-exports.hostRouter = hostRouter;
+hostRouter.get("/add-home", hostController.getHome);
+hostRouter.post("/add-home", hostController.postHome);
+hostRouter.get("/hostList", hostController.hostList);
+
+module.exports = hostRouter;

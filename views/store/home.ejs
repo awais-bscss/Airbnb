@@ -1,0 +1,142 @@
+<!-- views/store/home.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head.ejs") %>
+    <style>
+      .home-card {
+        transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+        width: 100%;
+        max-width: 250px;
+        height: 360px;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+      }
+      .home-card:hover {
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+        transform: translateY(-4px);
+      }
+      .card-image {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+      }
+      .btn-book {
+        background-color: #1e40af;
+        color: white;
+        transition: background-color 0.2s ease-in-out;
+        width: 48%;
+        text-align: center;
+        border-radius: 6px;
+        padding: 6px 0;
+        font-size: 0.8rem;
+      }
+      .btn-book:hover {
+        background-color: #1e3a8a;
+      }
+      .btn-detail {
+        background-color: #d97706;
+        color: white;
+        transition: background-color 0.2s ease-in-out;
+        width: 48%;
+        text-align: center;
+        border-radius: 6px;
+        padding: 6px 0;
+        font-size: 0.8rem;
+      }
+      .btn-detail:hover {
+        background-color: #b45309;
+      }
+      .btn-add-home {
+        background-color: #15803d;
+        transition: background-color 0.2s ease-in-out;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      .btn-add-home:hover {
+        background-color: #166534;
+      }
+      .rating-star {
+        color: #facc15;
+        font-size: 0.85rem;
+      }
+      .card-grid {
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+      .btn-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: auto;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 flex flex-col min-h-screen">
+    <%- include("../partials/nav.ejs") %>
+    <header class="w-full py-4 mt-10 shadow-lg">
+      <h1 class="text-3xl font-bold text-black text-center">
+        Welcome to Our Site
+      </h1>
+    </header>
+    <main class="flex flex-col items-center flex-grow px-4 py-6 gap-8">
+      <h2 class="text-xl font-semibold text-gray-900 text-center">
+        Our Registered Homes
+      </h2>
+      <div
+        class="card-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-4xl"
+      >
+        <% home.forEach(home => { %>
+        <div
+          class="home-card bg-white shadow-md p-3 flex flex-col items-center"
+        >
+          <img
+            src="<%= home.PhotoURL || '/images/fallback.jpg' %>"
+            alt="<%= home.homeName %>"
+            class="card-image"
+          />
+          <h3 class="text-sm font-bold text-gray-800 mb-1 text-center truncate">
+            <%= home.homeName %>
+          </h3>
+          <p class="text-gray-600 text-xs mb-1">
+            <strong>Price:</strong> $<%= home.price %>
+          </p>
+          <p class="text-gray-600 text-xs mb-1">
+            <strong>Location:</strong> <%= home.location %>
+          </p>
+          <p class="text-gray-600 text-xs mb-2">
+            <strong>Rating:</strong>
+            <span class="rating-star">★</span> <%= home.rating %>/5
+          </p>
+          <div class="btn-container">
+            <a
+              href="/book/<%= home.id %>"
+              class="btn-book font-medium rounded-md shadow-sm"
+            >
+              Book Now
+            </a>
+            <a
+              href="/detail/<%= home.id %>"
+              class="btn-detail font-medium rounded-md shadow-sm"
+            >
+              Detail
+            </a>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <a
+        href="/host/add-home"
+        class="btn-add-home text-white font-medium rounded-md shadow-md transition duration-300 text-center"
+      >
+        Add Home
+      </a>
+    </main>
+  </body>
+</html>

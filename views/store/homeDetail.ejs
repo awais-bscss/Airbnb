@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head.ejs") %>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9fafb;
+        margin: 0;
+        padding: 0;
+      }
+
+      .home-detail {
+        width: 100%;
+        max-width: 1000px;
+        border-radius: 12px;
+        background-color: #ffffff;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        margin: 2.5rem auto;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .home-detail:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .detail-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .image-container img {
+        width: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+        max-height: 420px;
+        border: 1px solid #e5e7eb;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .image-container img:hover {
+        transform: scale(1.02);
+      }
+
+      .info-container h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.75rem;
+      }
+
+      .info-container p {
+        font-size: 1rem;
+        color: #4b5563;
+        margin: 0.7rem 0;
+      }
+
+      .rating-star {
+        color: #fbbf24;
+        font-size: 1.2rem;
+        margin-right: 4px;
+      }
+
+      .btn-book {
+        display: inline-block;
+        background-color: #2563eb;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin-top: 1.5rem;
+        transition: background 0.3s ease, transform 0.2s ease;
+      }
+
+      .btn-book:hover {
+        background-color: #1d4ed8;
+        transform: translateY(-1px);
+      }
+
+      @media (min-width: 768px) {
+        .detail-container {
+          flex-direction: row;
+        }
+
+        .image-container {
+          flex: 1.5;
+        }
+
+        .info-container {
+          flex: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+
+    <header style="text-align: center">
+      <h1
+        style="
+          color: black;
+          font-size: 2rem;
+          font-weight: 700;
+          margin-top: 10px;
+        "
+      >
+        Home Details
+      </h1>
+    </header>
+
+    <main class="flex flex-col items-center flex-grow px-4 py-8">
+      <div class="home-detail">
+        <div class="detail-container">
+          <div class="image-container">
+            <img
+              src="<%= home.PhotoURL || '/images/fallback.jpg' %>"
+              alt="<%= home.homeName %>"
+              class="card-image"
+            />
+          </div>
+          <div class="info-container">
+            <h2><%= home.homeName %></h2>
+            <p><strong>Price:</strong> $<%= home.price %> per night</p>
+            <p><strong>Location:</strong> <%= home.location %></p>
+            <p>
+              <strong>Rating:</strong>
+              <span class="rating-star">★</span> <%= home.rating %>/5
+            </p>
+            <a href="/book/<%= home.id %>" class="btn-book">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
