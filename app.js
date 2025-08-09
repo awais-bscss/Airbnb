@@ -21,9 +21,7 @@ app.use((req, res, next) => {
 // Register routes
 try {
   app.use("/host", hostRouter);
-  console.log("hostRouter registered successfully");
   app.use(userRouter);
-  console.log("userRouter registered successfully");
   app.use((req, res, next) => {
     console.log(`Catch-all triggered for: ${req.originalUrl}`);
     storeController.notFound(req, res, next);

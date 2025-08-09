@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head.ejs") %>
+    <style>
+      .home-card {
+        transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+        width: 100%;
+        max-width: 250px;
+        height: 380px;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+      }
+      .home-card:hover {
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+        transform: translateY(-4px);
+      }
+      .card-image {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+      }
+      .btn-remove {
+        background-color: #801515;
+        color: white;
+        transition: background-color 0.2s ease-in-out;
+        text-align: center;
+        border-radius: 6px;
+        padding: 6px 0;
+        font-size: 0.8rem;
+        width: 100%;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-remove:hover {
+        background-color: #cc1e2c;
+      }
+      .rating-star {
+        color: #facc15;
+        font-size: 0.85rem;
+      }
+      .card-grid {
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+      .btn-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap: 0.5rem;
+        margin-top: auto;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 flex flex-col min-h-screen">
+    <%- include("../partials/nav.ejs") %>
+
+    <main class="flex flex-col items-center flex-grow px-4 py-6 gap-8">
+      <h2 class="text-xl font-semibold text-gray-900 text-center">
+        Our Favourite Homes
+      </h2>
+
+      <div
+        class="card-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-4xl"
+      >
+        <% favouriteHomes.forEach(home => { %>
+        <div
+          class="home-card bg-white shadow-md p-3 flex flex-col items-center"
+        >
+          <img
+            src="<%= home.PhotoURL || '/images/fallback.jpg' %>"
+            alt="<%= home.homeName %>"
+            class="card-image"
+          />
+          <h3 class="text-sm font-bold text-gray-800 mb-1 text-center truncate">
+            <%= home.homeName %>
+          </h3>
+          <p class="text-gray-600 text-xs mb-1">
+            <strong>Price:</strong> $<%= home.price %>
+          </p>
+          <p class="text-gray-600 text-xs mb-1">
+            <strong>Location:</strong> <%= home.location %>
+          </p>
+          <p class="text-gray-600 text-xs mb-2">
+            <strong>Rating:</strong>
+            <span class="rating-star">★</span> <%= home.rating %>/5
+          </p>
+          <div class="btn-container flex items-center justify-center">
+            <form action="/favourites/remove/<%= home.id %>" method="POST">
+              <button type="submit" class="btn-remove px-5 py-2">Remove</button>
+            </form>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </main>
+  </body>
+</html>

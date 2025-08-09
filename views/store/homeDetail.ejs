@@ -131,7 +131,7 @@
               <strong>Rating:</strong>
               <span class="rating-star">★</span> <%= home.rating %>/5
             </p>
-            <a href="/book/<%= home.id %>" class="btn-book">Book Now</a>
+            <div><%-include("../partials/favourites.ejs")%></div>
           </div>
         </div>
       </div>

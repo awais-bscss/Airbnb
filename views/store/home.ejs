@@ -30,7 +30,6 @@
         background-color: #1e40af;
         color: white;
         transition: background-color 0.2s ease-in-out;
-        width: 48%;
         text-align: center;
         border-radius: 6px;
         padding: 6px 0;
@@ -43,7 +42,6 @@
         background-color: #d97706;
         color: white;
         transition: background-color 0.2s ease-in-out;
-        width: 48%;
         text-align: center;
         border-radius: 6px;
         padding: 6px 0;
@@ -54,6 +52,7 @@
       }
       .btn-add-home {
         background-color: #15803d;
+        color: white;
         transition: background-color 0.2s ease-in-out;
         border-radius: 6px;
         padding: 10px 20px;
@@ -74,21 +73,25 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
+        gap: 0.5rem;
         margin-top: auto;
       }
     </style>
   </head>
   <body class="bg-gray-50 flex flex-col min-h-screen">
     <%- include("../partials/nav.ejs") %>
+
     <header class="w-full py-4 mt-10 shadow-lg">
       <h1 class="text-3xl font-bold text-black text-center">
         Welcome to Our Site
       </h1>
     </header>
+
     <main class="flex flex-col items-center flex-grow px-4 py-6 gap-8">
       <h2 class="text-xl font-semibold text-gray-900 text-center">
         Our Registered Homes
       </h2>
+
       <div
         class="card-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-4xl"
       >
@@ -114,29 +117,21 @@
             <strong>Rating:</strong>
             <span class="rating-star">★</span> <%= home.rating %>/5
           </p>
+
           <div class="btn-container">
-            <a
-              href="/book/<%= home.id %>"
-              class="btn-book font-medium rounded-md shadow-sm"
-            >
-              Book Now
-            </a>
+            <%- include("../partials/favourites.ejs",{home:home}) %>
             <a
               href="/detail/<%= home.id %>"
-              class="btn-detail font-medium rounded-md shadow-sm"
+              class="btn-detail w-full text-center"
             >
-              Detail
+              Details
             </a>
           </div>
         </div>
         <% }) %>
       </div>
-      <a
-        href="/host/add-home"
-        class="btn-add-home text-white font-medium rounded-md shadow-md transition duration-300 text-center"
-      >
-        Add Home
-      </a>
+
+      <a href="/host/add-home" class="btn-add-home text-center"> Add Home </a>
     </main>
   </body>
 </html>

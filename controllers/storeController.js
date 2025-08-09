@@ -1,3 +1,4 @@
+const Favourite = require("../models/favourite");
 const Home = require("../models/home");
 
 const addHome = async (req, res, next) => {
@@ -20,16 +21,31 @@ const bookings = (req, res, next) => {
     });
   }
 };
-const favouriteList = (req, res, next) => {
+const favouriteList = async (req, res, next) => {
   try {
-    res.render("store/favouriteList", { pageTitle: "Favourite List" });
+    const favouriteIds = await Favourite.getFavourite();
+    const homes = await Home.fetchAll();
+    const favouriteHomes = homes.filter((home) =>
+      favouriteIds.includes(home.id)
+    );
+    res.render("store/favouriteList", {
+      pageTitle: "Favourite List",
+      favouriteHomes: favouriteHomes,
+    });
   } catch (err) {
-    console.error("Error rendering favourite list:", err);
+    console.error("Error fetching favourites:", err);
     res.status(500).render("error", {
       pageTitle: "Error",
       error: "Failed to load favourite list",
     });
   }
+};
+const addToFavourite = (req, res, next) => {
+  const homeId = req.body.homeId;
+  // Logic to add home to favourites
+  Favourite.addToFavourites(homeId);
+  console.log(`Home with ID ${homeId} added to favourites`);
+  res.redirect("/favourites");
 };
 const index = (req, res, next) => {
   try {
@@ -105,4 +121,5 @@ module.exports = {
   index,
   homeBooked,
   homeDetail,
+  addToFavourite,
 };
